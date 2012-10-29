@@ -386,7 +386,11 @@ void atexit_runsttysane()
 
 void modprobing_msr()
 {
+#ifdef __linux__
     system("modprobe msr");
+#elif __FreeBSD__
+    system("kldload cpuctl");
+#endif
 }
 
 //Info: I start from index 1 when i talk about cores on CPU
